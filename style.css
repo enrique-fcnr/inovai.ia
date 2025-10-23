@@ -1,0 +1,94 @@
+/* Variáveis CSS para consistência de cores */
+:root {
+    --gradient-colors: linear-gradient(to right, #fdad2d, #c82a7a, #773b9a);
+    --inova-accent-color-start: #fdad2d; /* Cor inicial do gradiente */
+    --inova-accent-color-end: #773b9a;   /* Cor final do gradiente */
+    --inova-accent-border: #773b9a; /* Cor para bordas e onde o gradiente não se aplica bem */
+    --inova-accent-text: #773b9a; /* Cor sólida para ícones ou textos onde o gradiente clip não é ideal */
+}
+
+/* Classe para aplicar gradiente a texto */
+.text-gradient {
+    background: var(--gradient-colors);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
+
+/* Classe para aplicar gradiente a background de botões/elementos */
+.bg-gradient-primary {
+    background: var(--gradient-colors);
+}
+
+/* Classe para aplicar gradiente a bordas de botões/elementos */
+.border-gradient-primary {
+    border-width: 2px; /* Ajuste se necessário */
+    border-style: solid;
+    /* Usado apenas no hover de botões CTA para bordas */
+    border-image: var(--gradient-colors) 1; 
+}
+
+/* 1. Animação de Rolagem Infinita para Parceiros */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+.logo-scroll-container {
+    width: 200%; 
+    display: flex;
+    animation: scroll 30s linear infinite;
+}
+
+/* Pausa no Hover */
+.logo-track:hover .logo-scroll-container {
+    animation-play-state: paused;
+}
+
+.logo-item {
+    width: 200px; 
+    flex-shrink: 0;
+    margin: 0 40px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.logo-item:hover {
+    opacity: 1;
+}
+
+/* 2. Estilos para o Roadmap (Versão Tabs) */
+.roadmap-tab.active {
+    /* REMOVIDO: Borda e Border-Image para usar apenas background e shadow */
+    border: none !important; 
+    background: var(--gradient-colors) !important; /* Gradiente no background */
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(119, 59, 154, 0.4); /* Sombra baseada em uma das cores do gradiente */
+}
+
+.roadmap-tab {
+    transition: all 0.3s ease;
+}
+
+/* Estilo para o destaque do Roadmap Ágil (Segunda Versão) */
+.roadmap-step-active {
+    /* REMOVIDO: Borda e Border-Image para usar apenas shadow */
+    border: none !important; 
+    color: var(--inova-accent-text); /* Cor sólida para o texto interno */
+    transform: scale(1.02); /* Escala ligeira para destaque */
+    box-shadow: 0 4px 15px rgba(119, 59, 154, 0.2);
+}
+
+/* 3. Estilos para o FAQ Interativo (Animação de Acordeão) */
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+}
+
+.faq-content.open {
+    max-height: 500px; /* Suficientemente grande para qualquer conteúdo */
+    /* Adiciona um padding vertical quando aberto para melhor espaçamento */
+    padding-bottom: 1rem;
+}
