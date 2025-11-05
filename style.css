@@ -111,3 +111,43 @@
 .logo-track.is-dragging .logo-scroll-container {
     animation-play-state: paused;
 }
+
+/* ATUALIZAÇÃO: Solução Correta e Simplificada (Sem ::after) */
+.hover-ia {
+    /* A palavra "IA" herda o 'background-clip' e o 'text-fill-color: transparent' do pai. */
+    
+    /* A única coisa que precisamos é transicionar o 'text-fill-color' */
+    transition: -webkit-text-fill-color 3s ease;
+    /* Adicionado 'color' para navegadores que não suportam 'text-fill-color' (embora o clip exija) */
+    transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
+}
+
+.hover-ia:hover {
+    /* Ao passar o mouse, mudamos o 'fill' de transparente para preto. */
+    /* Isso sobrepõe o gradiente (que ainda está lá) com uma cor sólida. */
+    -webkit-text-fill-color: #000;
+    color: #000; /* Fallback */
+}
+
+/* Transição para a palavra "Tempo." (correta, como estava) */
+.hover-tempo {
+    /* 1. Aplica o gradiente como background (fica escondido) */
+    background: var(--gradient-colors);
+    
+    /* 2. Aplica o clip para o texto */
+    -webkit-background-clip: text;
+    background-clip: text;
+    
+    /* 3. Define a cor do texto como PRETO (escondendo o gradiente) */
+    -webkit-text-fill-color: #000;
+    color: #000; /* Fallback */
+
+    /* 4. Transição aplicada na classe base para suavizar entrada e saída */
+    transition: color 3s ease, -webkit-text-fill-color 0.3s ease;
+}
+
+.hover-tempo:hover {
+    /* 5. No hover, torna a cor do texto TRANSPARENTE, revelando o gradiente */
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+}
