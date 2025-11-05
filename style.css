@@ -29,19 +29,19 @@
     border-image: var(--gradient-colors) 1; 
 }
 
-/* 1. Animação de Rolagem Infinita para Parceiros */
+/* 1. Animação de Rolagem Infinita para Parceiros (Reativada com suporte a drag) */
 @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); } 
 }
 
 .logo-scroll-container {
-    width: 200%; 
+    width: 200%; /* Reativado */
     display: flex;
-    animation: scroll 30s linear infinite;
+    animation: scroll 30s linear infinite; /* Reativado */
 }
 
-/* Pausa no Hover */
+/* Pausa no Hover (Reativado) */
 .logo-track:hover .logo-scroll-container {
     animation-play-state: paused;
 }
@@ -91,4 +91,23 @@
     max-height: 500px; /* Suficientemente grande para qualquer conteúdo */
     /* Adiciona um padding vertical quando aberto para melhor espaçamento */
     padding-bottom: 1rem;
+}
+
+/* NOVO: Estilos para Arrastar (Drag) */
+.logo-track {
+    /* Previne seleção de texto enquanto arrasta */
+    -webkit-user-select: none; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Classe 'is-dragging' é adicionada via JS */
+.logo-track.is-dragging {
+    cursor: grabbing;
+}
+
+/* NOVO: Pausa a animação CSS enquanto o usuário está arrastando manualmente */
+.logo-track.is-dragging .logo-scroll-container {
+    animation-play-state: paused;
 }

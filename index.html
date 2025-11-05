@@ -25,7 +25,24 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                 }
-            }
+            },
+            /* NOVO: Adicionado plugin para esconder a barra de rolagem */
+            plugins: [
+                function({ addUtilities }) {
+                    addUtilities({
+                        '.scrollbar-hide': {
+                            /* Firefox */
+                            'scrollbar-width': 'none',
+                            /* IE and Edge */
+                            '-ms-overflow-style': 'none',
+                            /* Safari and Chrome */
+                            '&::-webkit-scrollbar': {
+                                'display': 'none'
+                            }
+                        }
+                    })
+                }
+            ]
         }
     </script>
     
@@ -85,7 +102,8 @@
             </div>
             
             <!-- Logo Track: Define a área visível do carrossel com efeito de fade nas bordas -->
-            <div class="logo-track w-full flex overflow-hidden whitespace-nowrap [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+            <!-- ATUALIZADO: Adicionado id, overflow-x-auto, cursor-grab e scrollbar-hide. Removido overflow-hidden -->
+            <div id="logo-track" class="logo-track w-full flex overflow-x-auto cursor-grab scrollbar-hide whitespace-nowrap [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
                 
                 <!-- Logo Scroll Container: Elemento que se move -->
                 <div class="logo-scroll-container">

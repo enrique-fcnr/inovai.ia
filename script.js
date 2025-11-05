@@ -203,4 +203,47 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // --- NOVO: Lógica para Arrastar (Drag) o Carrossel de Logos ---
+    const slider = document.getElementById('logo-track');
+    if (slider) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('is-dragging');
+            slider.style.cursor = 'grabbing'; // Força o cursor grabbing
+            
+            // Pega a posição inicial do mouse e o scroll atual
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('is-dragging');
+            slider.style.cursor = 'grab'; // Retorna ao cursor grab
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('is-dragging');
+            slider.style.cursor = 'grab'; // Retorna ao cursor grab
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault(); // Previne seleção de texto
+            
+            // Calcula o movimento
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Multiplicador para tornar o arrastar mais rápido
+            
+            // Define o novo scroll
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }
+    // Fim da lógica de Arrastar
 });
